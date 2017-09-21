@@ -120,7 +120,17 @@ class NaiveBayes:
           - the number of documents seen of each label (self.class_total_doc_counts)
         """
 
-        pass
+        if label is 'POS':
+            for word in bow:
+                self.class_word_counts[0][word] += bow[word]
+                self.class_total_word_counts += bow[word]
+            self.class_total_doc_counts[0] += 1
+        if label is 'NEG':
+            for word in bow:
+                self.class_word_counts[1][word] += bow[word]
+                self.class_total_word_counts += bow[word]
+            self.class_total_doc_counts[1] += 1
+        self.vocab = self.vocab.union(set(bow))
 
     def tokenize_and_update_model(self, doc, label):
         """
