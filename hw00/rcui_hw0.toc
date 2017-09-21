@@ -1,0 +1,10 @@
+\contentsline {section}{1 Domain of a joint distribution}{3}
+\contentsline {subsection}{1.1}{3}
+\contentsline {subsection}{1.2}{3}
+\contentsline {section}{2 Independence versus Basic Definitions}{4}
+\contentsline {subsection}{2.1}{4}
+\contentsline {section}{3 Logarithms}{5}
+\contentsline {subsection}{3.1 Log-probs}{5}
+\contentsline {subsection}{3.2 Prob ratios}{5}
+\contentsline {subsection}{3.3 Log prob ratio}{5}
+\contentsline {section}{4 Deriving Bayes Rule}{6}
