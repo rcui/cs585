@@ -120,16 +120,10 @@ class NaiveBayes:
           - the number of documents seen of each label (self.class_total_doc_counts)
         """
 
-        if label is 'POS':
-            for word in bow:
-                self.class_word_counts[0][word] += bow[word]
-                self.class_total_word_counts += bow[word]
-            self.class_total_doc_counts[0] += 1
-        if label is 'NEG':
-            for word in bow:
-                self.class_word_counts[1][word] += bow[word]
-                self.class_total_word_counts += bow[word]
-            self.class_total_doc_counts[1] += 1
+        for word in bow:
+            self.class_word_counts[label][word] += bow[word]
+            self.class_total_word_counts[label] += bow[word]    
+        self.class_total_doc_counts[label] += 1
         self.vocab = self.vocab.union(set(bow))
 
     def tokenize_and_update_model(self, doc, label):
@@ -158,7 +152,7 @@ class NaiveBayes:
         Returns the probability of word given label
         according to this NB model.
         """
-        pass
+        return self.class_word_counts[label][word]/sum(self.class_word_counts[label].values())
 
     def p_word_given_label_and_pseudocount(self, word, label, alpha):
         """
@@ -167,7 +161,7 @@ class NaiveBayes:
         Returns the probability of word given label wrt psuedo counts.
         alpha - pseudocount parameter
         """
-        pass
+        return (self.class_word_counts[label][word] + alpha)/(sum(self.class_word_counts[label].values()) + len(self.class_word_counts[label]) * alpha)
 
     def log_likelihood(self, bow, label, alpha):
         """
@@ -178,7 +172,7 @@ class NaiveBayes:
         label - either the positive or negative label
         alpha - float; pseudocount parameter
         """
-        pass
+        return math.log(p_word_given_label_and_pseudocount(word, label, alpha))
 
     def log_prior(self, label):
         """
@@ -186,7 +180,7 @@ class NaiveBayes:
 
         Returns the log prior of a document having the class 'label'.
         """
-        pass
+        return math.log()
 
     def unnormalized_log_posterior(self, bow, label, alpha):
         """
